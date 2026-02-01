@@ -4,18 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ALL MAN</title>
+  <meta name="description" content="思考・音楽・酒・モノづくりの現在地（自動更新）" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 
 <body>
   <main class="wrap">
 
-    <!-- ===== Paper Header (ほぼ日っぽいトップ面) ===== -->
+    <!-- ===== Paper top (ほぼ日っぽい一面) ===== -->
     <section class="paper" id="top">
+
+      <!-- Hero image（不要ならこのブロックごと削除OK） -->
+      <div class="hero">
+        <img src="assets/hero-allman.png" alt="ALL MAN hero" />
+      </div>
+
       <div class="paperHead">
         <div class="brandRow">
           <img src="assets/icon-allman.png" class="icon" alt="ALL MAN icon" />
-          <div>
+          <div class="brandText">
             <h1 class="brand">ALL MAN</h1>
             <p class="tagline">思考・音楽・酒・モノづくりの現在地（自動更新）</p>
           </div>
@@ -30,10 +37,12 @@
       </div>
 
       <div class="paperGrid">
-        <!-- 今日の更新（note + YouTube を混ぜて見出し表示） -->
+        <!-- 今日の更新（note + YouTube を混ぜた見出し） -->
         <section class="paperLead">
           <h2 class="paperTitle">今日の更新</h2>
-          <ol id="mixList" class="headlineList"></ol>
+          <ol id="mixList" class="headlineList">
+            <li class="loading">読み込み中…</li>
+          </ol>
         </section>
 
         <!-- 連載棚 -->
@@ -91,8 +100,12 @@
     </section>
 
     <footer class="footer">
-      <small id="genAt"></small>
+      <div class="footerRow">
+        <small id="genAt"></small>
+        <small class="footSig">ALL MAN / edited by Front Man</small>
+      </div>
     </footer>
+
   </main>
 
   <script src="assets/app.js"></script>

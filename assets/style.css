@@ -5,10 +5,15 @@
   --line:rgba(0,0,0,.12);
   --muted:rgba(0,0,0,.55);
   --accent:rgba(0,0,0,.78);
+
   font-family: ui-serif, "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
 }
 
 *{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+}
 
 body{
   margin:0;
@@ -29,6 +34,23 @@ body{
   border-radius:14px;
   padding:18px;
   box-shadow: 0 10px 28px rgba(0,0,0,.06);
+}
+
+/* Hero (大きすぎ問題を抑える) */
+.hero{
+  margin: 0 0 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #f6f2ea;
+}
+
+.hero img{
+  width: 100%;
+  max-height: 360px;          /* ここで抑える */
+  object-fit: cover;          /* トリミング */
+  object-position: center top;/* 顔を残す */
+  display: block;
 }
 
 .paperHead{
@@ -57,6 +79,8 @@ body{
   flex: 0 0 auto;
 }
 
+.brandText{ min-width: 0; }
+
 .brand{
   margin:0;
   font-size:28px;
@@ -72,26 +96,26 @@ body{
   line-height:1.4;
 }
 
+/* 右側リンク：ボタンではなく「索引」風 */
 .topLinks{
   display:flex;
-  gap:8px;
+  gap:10px;
   flex-wrap:wrap;
   justify-content:flex-end;
   align-items:center;
+  padding-top: 4px;
 }
 
 .topLinks a{
   color:var(--ink);
   text-decoration:none;
-  padding:6px 10px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  font-size:13px;
-  background:#fff;
+  border-bottom:1px dotted rgba(0,0,0,.35);
+  padding:2px 0;
+  font-size:14px;
 }
 
 .topLinks a:hover{
-  border-color: rgba(0,0,0,.22);
+  border-bottom-color: rgba(0,0,0,.65);
 }
 
 /* Grid: headlines + side */
@@ -114,7 +138,7 @@ body{
 
 .headlineList li{
   margin:10px 0;
-  line-height:1.55;
+  line-height:1.6;
 }
 
 .headlineList a{
@@ -132,6 +156,11 @@ body{
   font-size:12px;
   margin-left:6px;
   white-space: nowrap;
+}
+
+.loading{
+  color: var(--muted);
+  font-style: italic;
 }
 
 .paperSide{
@@ -205,7 +234,7 @@ body{
 
 .list li{
   margin:8px 0;
-  line-height:1.55;
+  line-height:1.6;
 }
 
 .list a{
@@ -292,6 +321,17 @@ body{
   text-align:left;
 }
 
+.footerRow{
+  display:flex;
+  gap:14px;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.footSig{
+  color: var(--muted);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 800px){
   .paperGrid{
@@ -309,5 +349,8 @@ body{
   }
   .topLinks{
     justify-content:flex-start;
+  }
+  .hero img{
+    max-height: 260px;
   }
 }
