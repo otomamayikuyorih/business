@@ -27,7 +27,7 @@ async function loadFeeds() {
 
   const mixList = document.getElementById("mixList");
   mixList.innerHTML = "";
-  mixed.slice(0, 10).forEach(item => {
+  mixed.slice(0, 3).forEach(item => {
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.href = item.link;
@@ -86,4 +86,5 @@ async function loadFeeds() {
 }
 
 loadFeeds().catch(console.error);
+
 
