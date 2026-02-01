@@ -4,15 +4,23 @@ import path from "node:path";
 import Parser from "rss-parser";
 
 const NOTE_RSS = "https://note.com/biz_organized/rss";
-const YT_RSS = "https://www.youtube.com/feeds/videos.xml?channel_id=UCjxf5PsgMyF_t1Az_6duZfg";
+const YT_RSS =
+  "https://www.youtube.com/feeds/videos.xml?channel_id=UCjxf5PsgMyF_t1Az_6duZfg";
 
 const OUT_PATH = path.join("data", "feed.json");
 const MAX_NOTE = 8;
 const MAX_YT = 6;
 
+// ★ YouTube(Atom) の media:* を拾えるように customFields を追加
 const parser = new Parser({
   headers: {
     "User-Agent": "man-ai-feed-bot/1.0 (+github actions)",
+  },
+  customFields: {
+    item: [
+      ["media:group", "media:group"],
+      ["media:thumbnail", "media:thumbnail"],
+    ],
   },
 });
 
@@ -22,8 +30,11 @@ function toISODate(d) {
 }
 
 function pickNoteThumb(item) {
+  // note RSS は enclosure が無い/弱い場合があるので、HTMLからも拾う
   if (item.enclosure?.url) return item.enclosure.url;
-  const html = item["content:encoded"] || item.content || item.contentSnippet || "";
+
+  const html =
+    item["content:encoded"] || item.content || item.contentSnippet || "";
   const m = String(html).match(/<img[^>]+src="([^"]+)"/i);
   return m?.[1] || "";
 }
@@ -32,12 +43,16 @@ function pickYouTubeThumb(item) {
   // YouTube RSS: media:group -> media:thumbnail
   const g = item["media:group"];
   const thumbs = g?.["media:thumbnail"];
+
   // thumbs は配列のことが多い
-  if (Array.isArray(thumbs) && thumbs[0]?.$?.url) return thumbs[0].$?.url;
+  if (Array.isArray(thumbs)) {
+    const url = thumbs[0]?.$?.url;
+    if (url) return url;
+  }
   // 単体オブジェクトのこともある
   if (thumbs?.$?.url) return thumbs.$.url;
 
-  // フォールバック: content から img を拾う
+  // フォールバック: content から img を拾う（念のため）
   const html = item.content || item.contentSnippet || "";
   const m = String(html).match(/<img[^>]+src="([^"]+)"/i);
   return m?.[1] || "";
@@ -64,6 +79,7 @@ async function main() {
   }));
 
   const out = {
+    // app.js が (generated_at * 1000) してるので「秒」で入れる
     generated_at: Math.floor(Date.now() / 1000),
     feeds: {
       note: notes,
@@ -73,7 +89,10 @@ async function main() {
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2), "utf-8");
-  console.log(`Wrote ${OUT_PATH} (note:${notes.length}, yt:${yts.length})`);
+
+  console.log(
+    `Wrote ${OUT_PATH} (note:${notes.length}, yt:${yts.length})`
+  );
 }
 
 main().catch((e) => {
