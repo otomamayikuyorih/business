@@ -6,36 +6,70 @@
   <title>ALL MAN</title>
   <link rel="stylesheet" href="assets/style.css" />
 </head>
+
 <body>
-  <header class="wrap">
-    <h1>ALL MAN</h1>
-    <p class="sub">思考・音楽・酒・モノづくりの現在地（自動更新）</p>
-
-    <nav class="nav">
-      <a href="#thoughts">Thoughts</a>
-      <a href="#sounds">Sounds</a>
-      <a href="#moments">Moments</a>
-      <a href="#objects">Objects</a>
-    </nav>
-
-    <div class="links">
-      <a href="https://note.com/biz_organized" target="_blank" rel="noopener">note</a>
-      <a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://x.com/hirokkobokko" target="_blank" rel="noopener">X</a>
-      <a href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">SUZURI</a>
-    </div>
-  </header>
-
   <main class="wrap">
+
+    <!-- ===== Paper Header (ほぼ日っぽいトップ面) ===== -->
+    <section class="paper" id="top">
+      <div class="paperHead">
+        <div class="brandRow">
+          <img src="assets/icon-allman.png" class="icon" alt="ALL MAN icon" />
+          <div>
+            <h1 class="brand">ALL MAN</h1>
+            <p class="tagline">思考・音楽・酒・モノづくりの現在地（自動更新）</p>
+          </div>
+        </div>
+
+        <div class="topLinks">
+          <a href="https://note.com/biz_organized" target="_blank" rel="noopener">note</a>
+          <a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://x.com/hirokkobokko" target="_blank" rel="noopener">X</a>
+          <a href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">SUZURI</a>
+        </div>
+      </div>
+
+      <div class="paperGrid">
+        <!-- 今日の更新（note + YouTube を混ぜて見出し表示） -->
+        <section class="paperLead">
+          <h2 class="paperTitle">今日の更新</h2>
+          <ol id="mixList" class="headlineList"></ol>
+        </section>
+
+        <!-- 連載棚 -->
+        <aside class="paperSide">
+          <h3 class="sideTitle">連載</h3>
+          <ul class="seriesList">
+            <li><a href="#thoughts">Business Man（note）</a></li>
+            <li><a href="#sounds">Chill The Man（YouTube）</a></li>
+            <li><a href="#moments">Sakenomi Man（X）</a></li>
+            <li><a href="#objects">Art Man（SUZURI）</a></li>
+          </ul>
+
+          <div class="mini">
+            <div class="miniLabel">更新方針</div>
+            <p class="miniText">各メディアを更新すると、このページも自動で更新されます。</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== Sections ===== -->
+
     <section id="thoughts" class="card">
       <h2>Latest Thoughts（note）</h2>
       <ul id="noteList" class="list"></ul>
+      <p class="meta">
+        <a href="https://note.com/biz_organized" target="_blank" rel="noopener">noteを開く</a>
+      </p>
     </section>
 
     <section id="sounds" class="card">
       <h2>Latest Sounds（YouTube）</h2>
       <div id="ytList" class="grid"></div>
-      <p class="meta"><a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">チャンネルを見る</a></p>
+      <p class="meta">
+        <a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">チャンネルを見る</a>
+      </p>
     </section>
 
     <section id="moments" class="card">
@@ -51,7 +85,9 @@
     <section id="objects" class="card">
       <h2>Objects（SUZURI）</h2>
       <p>新作や全商品はこちら：</p>
-      <p><a class="btn" href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">SUZURIショップへ</a></p>
+      <p>
+        <a class="btn" href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">SUZURIショップへ</a>
+      </p>
     </section>
 
     <footer class="footer">
