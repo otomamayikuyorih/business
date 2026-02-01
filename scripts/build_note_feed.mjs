@@ -4,8 +4,11 @@ import path from "node:path";
 import Parser from "rss-parser";
 
 const NOTE_RSS = "https://note.com/biz_organized/rss";
+const YT_RSS = "https://www.youtube.com/feeds/videos.xml?channel_id=UCjxf5PsgMyF_t1Az_6duZfg";
+
 const OUT_PATH = path.join("data", "feed.json");
-const MAX_ITEMS = 8;
+const MAX_NOTE = 8;
+const MAX_YT = 6;
 
 const parser = new Parser({
   headers: {
@@ -15,44 +18,62 @@ const parser = new Parser({
 
 function toISODate(d) {
   const dt = d ? new Date(d) : null;
-  return dt && !Number.isNaN(dt.getTime()) ? dt.toISOString() : null;
+  return dt && !Number.isNaN(dt.getTime()) ? dt.toISOString() : "";
 }
 
-function pickThumb(item) {
-  // note RSS: enclosure / media:thumbnail / content:encoded “à‚Ì‰æ‘œc‚È‚Ç‚ª‚ ‚è“¾‚é
-  // rss-parser‚ÌcustomFields–³‚µ‚Å‚à enclosure.url ‚ªæ‚ê‚é‚±‚Æ‚ª‘½‚¢
+function pickNoteThumb(item) {
   if (item.enclosure?.url) return item.enclosure.url;
-
-  // item.content ‚É img ‚ªŠÜ‚Ü‚ê‚Ä‚¢‚éê‡‚ÌŠÈˆÕ’Šo
   const html = item["content:encoded"] || item.content || item.contentSnippet || "";
   const m = String(html).match(/<img[^>]+src="([^"]+)"/i);
-  if (m?.[1]) return m[1];
+  return m?.[1] || "";
+}
 
-  return "";
+function pickYouTubeThumb(item) {
+  // YouTube RSS: media:group -> media:thumbnail
+  const g = item["media:group"];
+  const thumbs = g?.["media:thumbnail"];
+  // thumbs ã¯é…åˆ—ã®ã“ã¨ãŒå¤šã„
+  if (Array.isArray(thumbs) && thumbs[0]?.$?.url) return thumbs[0].$?.url;
+  // å˜ä½“ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã“ã¨ã‚‚ã‚ã‚‹
+  if (thumbs?.$?.url) return thumbs.$.url;
+
+  // ãƒ•ã‚©ãƒ¼ãƒ«ãƒãƒƒã‚¯: content ã‹ã‚‰ img ã‚’æ‹¾ã†
+  const html = item.content || item.contentSnippet || "";
+  const m = String(html).match(/<img[^>]+src="([^"]+)"/i);
+  return m?.[1] || "";
 }
 
 async function main() {
-  const feed = await parser.parseURL(NOTE_RSS);
+  const [note, yt] = await Promise.all([
+    parser.parseURL(NOTE_RSS),
+    parser.parseURL(YT_RSS),
+  ]);
 
-  const items = (feed.items || []).slice(0, MAX_ITEMS).map((it) => ({
+  const notes = (note.items || []).slice(0, MAX_NOTE).map((it) => ({
     title: it.title || "",
     link: it.link || "",
-    date: toISODate(it.isoDate || it.pubDate) || "",
-    thumb: pickThumb(it),
+    date: toISODate(it.isoDate || it.pubDate),
+    thumb: pickNoteThumb(it),
+  }));
+
+  const yts = (yt.items || []).slice(0, MAX_YT).map((it) => ({
+    title: it.title || "",
+    link: it.link || "",
+    date: toISODate(it.isoDate || it.pubDate),
+    thumb: pickYouTubeThumb(it),
   }));
 
   const out = {
-    generated_at: Date.now(),
+    generated_at: Math.floor(Date.now() / 1000),
     feeds: {
-      note: items,
-      youtube: [], // note‚¾‚¯ŒŸØ‚È‚Ì‚Å‹ó‚ÅOKi¡‚ÌUI‚ªyoutube‚àŒ©‚é‚È‚ç‹ó”z—ñ‚ªˆÀ‘Sj
+      note: notes,
+      youtube: yts,
     },
   };
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2), "utf-8");
-
-  console.log(`Wrote ${OUT_PATH} (${items.length} items)`);
+  console.log(`Wrote ${OUT_PATH} (note:${notes.length}, yt:${yts.length})`);
 }
 
 main().catch((e) => {
