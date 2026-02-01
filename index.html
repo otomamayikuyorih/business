@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ALL MAN</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="wrap">
+    <h1>ALL MAN</h1>
+    <p class="sub">思考・音楽・酒・モノづくりの現在地（自動更新）</p>
+
+    <nav class="nav">
+      <a href="#thoughts">Thoughts</a>
+      <a href="#sounds">Sounds</a>
+      <a href="#moments">Moments</a>
+      <a href="#objects">Objects</a>
+    </nav>
+
+    <div class="links">
+      <a href="https://note.com/biz_organized" target="_blank" rel="noopener">note</a>
+      <a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://x.com/hirokkobokko" target="_blank" rel="noopener">X</a>
+      <a href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">SUZURI</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="thoughts" class="card">
+      <h2>Latest Thoughts（note）</h2>
+      <ul id="noteList" class="list"></ul>
+    </section>
+
+    <section id="sounds" class="card">
+      <h2>Latest Sounds（YouTube）</h2>
+      <div id="ytList" class="grid"></div>
+      <p class="meta"><a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">チャンネルを見る</a></p>
+    </section>
+
+    <section id="moments" class="card">
+      <h2>Latest Moments（X）</h2>
+      <a class="twitter-timeline"
+         data-height="520"
+         href="https://x.com/hirokkobokko?ref_src=twsrc%5Etfw">
+        Posts by @hirokkobokko
+      </a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </section>
+
+    <section id="objects" class="card">
+      <h2>Objects（SUZURI）</h2>
+      <p>新作や全商品はこちら：</p>
+      <p><a class="btn" href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">SUZURIショップへ</a></p>
+    </section>
+
+    <footer class="footer">
+      <small id="genAt"></small>
+    </footer>
+  </main>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

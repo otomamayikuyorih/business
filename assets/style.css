@@ -1,0 +1,27 @@
+:root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif; }
+body { margin: 0; background: #0b0c10; color: #e8e8e8; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 20px; }
+h1 { margin: 6px 0 0; letter-spacing: 0.08em; }
+.sub { margin: 8px 0 0; opacity: 0.8; }
+
+.nav { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.nav a { color: #e8e8e8; opacity: 0.85; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+
+.links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.links a { color: #e8e8e8; opacity: 0.9; text-decoration: none; padding: 6px 10px; border: 1px solid rgba(255,255,255,0.15); border-radius: 999px; }
+
+.card { background: #15171c; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px; margin: 16px 0; }
+.list { padding-left: 18px; margin: 10px 0 0; }
+.list li { margin: 8px 0; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 10px; }
+.yt { display: block; text-decoration: none; color: inherit; background: #0f1116; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
+.yt img { width: 100%; height: auto; display: block; }
+.yt .t { padding: 10px; font-size: 14px; line-height: 1.35; opacity: 0.95; }
+
+.btn { display: inline-block; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); text-decoration: none; color: #e8e8e8; }
+
+.meta { margin-top: 10px; opacity: 0.8; }
+.meta a { color: #e8e8e8; }
+
+.footer { opacity: 0.7; margin: 18px 0 40px; }
