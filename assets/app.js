@@ -12,7 +12,7 @@ function labelOf(kind) {
 }
 
 async function loadFeeds() {
-  const res = await fetch("data/feed.json", { cache: "no-store" });
+  const res = await fetch(`./data/feed.json?v=${Date.now()}`, { cache: "no-store" });
   const data = await res.json();
 
   const genAt = new Date((data.generated_at || 0) * 1000);
@@ -86,3 +86,4 @@ async function loadFeeds() {
 }
 
 loadFeeds().catch(console.error);
+
