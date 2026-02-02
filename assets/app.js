@@ -19,36 +19,10 @@ async function loadFeeds() {
   document.getElementById("genAt").textContent =
     `generated: ${isNaN(genAt) ? "-" : genAt.toLocaleString("ja-JP")}`;
 
-  // ---- MIX HEADLINES (note + youtube) ----
-  const mixed = [];
-  (data.feeds.note || []).forEach(x => mixed.push({ ...x, kind: "note", ts: toEpoch(x.date) }));
-  (data.feeds.youtube || []).forEach(x => mixed.push({ ...x, kind: "youtube", ts: toEpoch(x.date) }));
-  mixed.sort((a, b) => (b.ts || 0) - (a.ts || 0));
-
-  const mixList = document.getElementById("mixList");
-  mixList.innerHTML = "";
-  mixed.slice(0, 3).forEach(item => {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    a.href = item.link;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.textContent = item.title || item.link;
-
-    const meta = document.createElement("span");
-    meta.className = "hmeta";
-    const d = item.ts ? new Date(item.ts).toLocaleDateString("ja-JP") : "";
-    meta.textContent = ` ${labelOf(item.kind)} / ${d}`;
-
-    li.appendChild(a);
-    li.appendChild(meta);
-    mixList.appendChild(li);
-  });
-
   // ---- existing note list ----
   const noteList = document.getElementById("noteList");
   noteList.innerHTML = "";
-  (data.feeds.note || []).forEach(item => {
+  (data.feeds.note || []).slice(0, 3).forEach(item => {
     const li = document.createElement("li");
     const a = document.createElement("a");
     a.href = item.link;
@@ -86,6 +60,7 @@ async function loadFeeds() {
 }
 
 loadFeeds().catch(console.error);
+
 
 
 
