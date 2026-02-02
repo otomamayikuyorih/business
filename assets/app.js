@@ -62,7 +62,7 @@ async function loadFeeds() {
   // ---- existing youtube grid ----
   const yt = document.getElementById("ytList");
   yt.innerHTML = "";
-  (data.feeds.youtube || []).slice(0, 6).forEach(v => {
+  (data.feeds.youtube || []).slice(0, 3).forEach(v => {
     const a = document.createElement("a");
     a.className = "yt";
     a.href = v.link;
@@ -86,5 +86,6 @@ async function loadFeeds() {
 }
 
 loadFeeds().catch(console.error);
+
 
 
