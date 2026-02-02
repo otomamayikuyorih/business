@@ -7,7 +7,6 @@ async function fetchText(url) {
   return await res.text();
 }
 
-// ‚´‚Á‚­‚èRSS‚©‚ç title/link/pubDate ‚ğ”²‚­i‰ó‚ê‚É‚­‚¢Å’áŒÀj
 function pickItemsFromRss(xml, limit = 8) {
   const items = [];
   const blocks = xml.split("<item>").slice(1);
@@ -28,26 +27,19 @@ function ensureDir(p) {
 }
 
 async function main() {
-  // note RSSinote‚Í /rss ‚ªˆÀ’èj
   const noteRssUrl = "https://note.com/biz_organized/rss";
-  // YouTube RSSi@ƒnƒ“ƒhƒ‹‚Í•sˆÀ’è‚È‚Ì‚Åuchannel_idv‚ğg‚¤‚Ì‚ª–{“–‚ÍŒ˜‚¢j
-  // ‚Ü‚¸‚Íƒnƒ“ƒhƒ‹‚Å‚·iƒ_ƒ‚È‚çŸ‚ÌƒXƒeƒbƒv‚Åchannel_id•û®‚ÉØ‘Öj
-  const ytRssUrl = "https://www.youtube.com/feeds/videos.xml?channel_id=";
 
-  // TODO: ‚±‚±‚É channel_id ‚ğ“ü‚ê‚éi•K{j
-  const YT_CHANNEL_ID = process.env.YT_CHANNEL_ID;
-  if (!YT_CHANNEL_ID) {
-    throw new Error("YT_CHANNEL_ID is missing. Set GitHub Actions secret or env.");
-  }
+  // â˜… ã“ã“ã‚’å®Œæˆå½¢ã§å›ºå®šï¼ˆenvä¸è¦ï¼‰
+  const ytRssUrl =
+    "https://www.youtube.com/feeds/videos.xml?channel_id=UCjxf5PsgMyF_t1Az_6duZfg";
 
   const [noteXml, ytXml] = await Promise.all([
     fetchText(noteRssUrl),
-    fetchText(ytRssUrl + YT_CHANNEL_ID)
+    fetchText(ytRssUrl),
   ]);
 
   const noteItems = pickItemsFromRss(noteXml, 10);
 
-  // YouTube‚Í <entry> Œ`®‚È‚Ì‚Å•Êˆ—
   const yt = [];
   const entries = ytXml.split("<entry>").slice(1);
   for (const e of entries) {
@@ -55,14 +47,13 @@ async function main() {
     const title = (e.match(/<title>(.*?)<\/title>/)?.[1] ?? "").trim();
     const link = (e.match(/<link rel="alternate" href="(.*?)"/)?.[1] ?? "").trim();
     const published = (e.match(/<published>(.*?)<\/published>/)?.[1] ?? "").trim();
-    // ƒTƒ€ƒlimedia:thumbnailj
     const thumb = (e.match(/<media:thumbnail url="(.*?)"/)?.[1] ?? "").trim();
     if (link) yt.push({ title, link, date: published, thumb });
   }
 
   const out = {
     generated_at: Math.floor(Date.now() / 1000),
-    feeds: { note: noteItems, youtube: yt }
+    feeds: { note: noteItems, youtube: yt },
   };
 
   ensureDir(path.join(process.cwd(), "data"));
