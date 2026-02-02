@@ -16,14 +16,14 @@
 
       <div class="paperHead">
         <div class="brandRow">
-          <img src="./assets/icon-allman.png" class="icon" alt="ALL MAN icon" />
+          <img src="./assets/icon-allman.png" class="icon" alt="MAN-AI icon" />
           <div class="brandText">
-            <h1 class="brand">MANーAI</h1>
+            <h1 class="brand">マンAI</h1>
             <p class="tagline">思考・音楽・酒・モノづくりの現在地（自動更新）</p>
           </div>
         </div>
 
-        <div class="topLinks">
+        <div class="topLinks" aria-label="外部リンク">
           <a href="https://note.com/biz_organized" target="_blank" rel="noopener">note</a>
           <a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">YouTube</a>
           <a href="https://x.com/hirokkobokko" target="_blank" rel="noopener">X</a>
@@ -33,15 +33,15 @@
 
       <div class="paperGrid">
         <!-- 今日の更新（note + YouTube を混ぜた見出し） -->
-        <section class="paperLead">
-          <h2 class="paperTitle">今日の更新</h2>
-          <ol id="mixList" class="headlineList">
+        <section class="paperLead" aria-labelledby="today-title">
+          <h2 id="today-title" class="paperTitle">今日の更新</h2>
+          <ol id="mixList" class="headlineList" aria-live="polite">
             <li class="loading">読み込み中…</li>
           </ol>
         </section>
 
         <!-- 連載棚 -->
-        <aside class="paperSide">
+        <aside class="paperSide" aria-label="連載">
           <h3 class="sideTitle">連載</h3>
           <ul class="seriesList">
             <li><a href="#thoughts">Business Man（note）</a></li>
@@ -78,9 +78,13 @@
 
     <section id="moments" class="card">
       <h2>Latest Moments（X）</h2>
+
+      <!-- X埋め込みはこの形が一番安定 -->
       <a class="twitter-timeline"
          data-height="520"
-         href="https://x.com/hirokkobokko?ref_src=twsrc%5Etfw">
+         data-dnt="true"
+         data-theme="light"
+         href="https://x.com/hirokkobokko">
         Posts by @hirokkobokko
       </a>
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -97,7 +101,7 @@
     <footer class="footer">
       <div class="footerRow">
         <small id="genAt"></small>
-        <small class="footSig">ALL MAN / edited by Front Man</small>
+        <small class="footSig">MAN-AI / edited by Front Man</small>
       </div>
     </footer>
 
@@ -106,5 +110,3 @@
   <script defer src="./assets/app.js"></script>
 </body>
 </html>
-
-
