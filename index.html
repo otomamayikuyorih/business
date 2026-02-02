@@ -1,9 +1,11 @@
+
+あなた:
 <!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>マンAI</title>
+  <title>MAN-AI</title>
   <meta name="description" content="思考・音楽・酒・モノづくりの現在地（自動更新）" />
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
@@ -18,7 +20,7 @@
         <div class="brandRow">
           <img src="./assets/icon-allman.png" class="icon" alt="MAN-AI icon" />
           <div class="brandText">
-            <h1 class="brand">マンAI</h1>
+            <h1 class="brand">MAN-AI</h1>
             <p class="tagline">思考・音楽・酒・モノづくりの現在地（自動更新）</p>
           </div>
         </div>
@@ -32,6 +34,14 @@
       </div>
 
       <div class="paperGrid">
+        <!-- 今日の更新（note + YouTube を混ぜた見出し） -->
+        <section class="paperLead" aria-labelledby="today-title">
+          <h2 id="today-title" class="paperTitle">今日の更新</h2>
+          <ol id="mixList" class="headlineList" aria-live="polite">
+            <li class="loading">読み込み中…</li>
+          </ol>
+        </section>
+
         <!-- 連載棚 -->
         <aside class="paperSide" aria-label="連載">
           <h3 class="sideTitle">連載</h3>
@@ -101,6 +111,4 @@
 
   <script defer src="./assets/app.js"></script>
 </body>
-</html>
-
-
+</html> 　　
