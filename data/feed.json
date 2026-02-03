@@ -1,5 +1,5 @@
 {
-  "generated_at": 1770112458,
+  "generated_at": 1770124735,
   "feeds": {
     "note": [
       {
@@ -65,6 +65,12 @@
     ],
     "youtube": [
       {
+        "title": "ループする午後",
+        "link": "https://www.youtube.com/watch?v=C8ihrA2QXPI",
+        "date": "2026-02-03T10:47:40+00:00",
+        "thumb": "https://i4.ytimg.com/vi/C8ihrA2QXPI/hqdefault.jpg"
+      },
+      {
         "title": "部屋のすみに座って",
         "link": "https://www.youtube.com/watch?v=4ugafJ141kw",
         "date": "2026-02-02T09:41:59+00:00",
@@ -105,12 +111,6 @@
         "link": "https://www.youtube.com/watch?v=YoGldlcf_Ss",
         "date": "2026-02-01T04:12:43+00:00",
         "thumb": "https://i2.ytimg.com/vi/YoGldlcf_Ss/hqdefault.jpg"
-      },
-      {
-        "title": "部屋のすみに腰かけて",
-        "link": "https://www.youtube.com/watch?v=mz3Y9bnoI44",
-        "date": "2026-02-01T04:12:17+00:00",
-        "thumb": "https://i2.ytimg.com/vi/mz3Y9bnoI44/hqdefault.jpg"
       }
     ]
   }
