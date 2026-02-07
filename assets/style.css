@@ -220,21 +220,22 @@ body{
   gap:12px;
 }
 
-#noteList > li{
-  margin:0;
-  padding:0;
-}
+#noteList > li{ margin:0; padding:0; }
 
 /* ===== Note Card Layout ===== */
 .card.note{
   display:grid;
-  grid-template-columns:120px 1fr;
   gap:14px;
   align-items:start;
   padding:14px;
 }
 
-.card.note .thumb{
+/* サムネがある時だけ2カラム（Chrome/Edge対応） */
+.card.note:has(img.thumb){
+  grid-template-columns:120px 1fr;
+}
+
+.card.note img.thumb{
   width:120px;
   height:120px;
   object-fit:cover;
@@ -245,6 +246,11 @@ body{
 
 .card.note .body{
   min-width:0;
+}
+
+/* サムネ無しのときは本文を全幅に */
+.card.note:not(:has(img.thumb)) .body{
+  grid-column:1 / -1;
 }
 
 .card.note .title{
@@ -273,13 +279,6 @@ body{
   font-size:13px;
   line-height:1.7;
   color:var(--accent);
-}
-
-/* (optional) enclosure など “追加情報” を出すなら */
-.card.note .extra{
-  margin-top:8px;
-  font-size:12px;
-  color:var(--muted);
 }
 
 /* ===== YouTube ===== */
@@ -357,15 +356,17 @@ body{
   .paperHead{ flex-direction:column; }
   .hero img{ max-height:260px; }
 
-  .card.note{
+  /* note */
+  .card.note:has(img.thumb){
     grid-template-columns:90px 1fr;
-    gap:12px;
   }
-  .card.note .thumb{
+  .card.note img.thumb{
     width:90px;
     height:90px;
     border-radius:12px;
   }
+
+  /* youtube */
   .yt img.thumb,
   .yt img{
     height:160px;
