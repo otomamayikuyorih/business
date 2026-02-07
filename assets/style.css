@@ -48,7 +48,7 @@ html, body{
 /* ★ HTML側に入れた <hr class="rule"> の見た目 */
 .rule{
   border: 0;
-  height: 2px;
+  height: 1px;
   background: var(--ink);
   margin: 16px 0 26px;
   opacity: .95;
@@ -169,4 +169,5 @@ html, body{
     align-items: flex-start;
   }
 }
+
 
