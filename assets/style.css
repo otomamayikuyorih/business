@@ -211,8 +211,85 @@ body{
   box-shadow:0 14px 34px rgba(0,0,0,.05);
 }
 
+/* ===== Feed Lists (note) ===== */
+#noteList{
+  list-style:none;
+  padding-left:0;
+  margin:0;
+  display:grid;
+  gap:12px;
+}
+
+#noteList > li{
+  margin:0;
+  padding:0;
+}
+
+/* ===== Note Card Layout ===== */
+.card.note{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:14px;
+  align-items:start;
+  padding:14px;
+}
+
+.card.note .thumb{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,#f7f3ea,#f2ece1);
+}
+
+.card.note .body{
+  min-width:0;
+}
+
+.card.note .title{
+  display:inline-block;
+  color:var(--ink);
+  text-decoration:none;
+  line-height:1.45;
+  font-weight:700;
+  letter-spacing:.02em;
+  font-family:"Noto Serif JP","Libre Baskerville",serif;
+  background:linear-gradient(transparent 68%,var(--tint) 0);
+  border-radius:6px;
+  padding:0 .12em;
+}
+
+.card.note .meta{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.03em;
+  font-family:"Libre Baskerville","Noto Serif JP",serif;
+}
+
+.card.note .desc{
+  margin:8px 0 0;
+  font-size:13px;
+  line-height:1.7;
+  color:var(--accent);
+}
+
+/* (optional) enclosure など “追加情報” を出すなら */
+.card.note .extra{
+  margin-top:8px;
+  font-size:12px;
+  color:var(--muted);
+}
+
 /* ===== YouTube ===== */
 .grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px;
+}
+
+#ytList{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:12px;
@@ -234,6 +311,34 @@ body{
   box-shadow:0 16px 34px rgba(0,0,0,.08);
 }
 
+.yt img.thumb,
+.yt img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  display:block;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#f7f3ea,#f2ece1);
+}
+
+.yt .body{
+  padding:10px 12px 12px;
+}
+
+.yt .title{
+  font-size:14px;
+  font-weight:700;
+  line-height:1.45;
+  letter-spacing:.02em;
+}
+
+.yt .meta{
+  margin-top:6px;
+  font-size:12px;
+  color:var(--muted);
+  font-family:"Libre Baskerville","Noto Serif JP",serif;
+}
+
 /* ===== Footer ===== */
 .footer{
   margin:18px 0 40px;
@@ -251,4 +356,18 @@ body{
   }
   .paperHead{ flex-direction:column; }
   .hero img{ max-height:260px; }
+
+  .card.note{
+    grid-template-columns:90px 1fr;
+    gap:12px;
+  }
+  .card.note .thumb{
+    width:90px;
+    height:90px;
+    border-radius:12px;
+  }
+  .yt img.thumb,
+  .yt img{
+    height:160px;
+  }
 }
