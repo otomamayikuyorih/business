@@ -8,32 +8,145 @@ async function fetchText(url) {
   return await res.text();
 }
 
-// note RSS: <item> をざっくりパース（壊れにくい最低限）
+/** ===== note RSS “できるだけ全部拾う”用ユーティリティ ===== */
+
+function decodeBasicEntities(s) {
+  return s
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function pickCdataOrText(inner) {
+  const cdata = inner.match(/<!\[CDATA\[(.*?)\]\]>/s)?.[1];
+  return cdata != null ? cdata : inner;
+}
+
+function getFirstTagInner(xml, tagName) {
+  const re = new RegExp(
+    `<${tagName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tagName}>`,
+    "i"
+  );
+  const m = xml.match(re);
+  return m?.[1] ?? "";
+}
+
+function getFirstTagText(xml, tagName) {
+  const inner = getFirstTagInner(xml, tagName);
+  const text = pickCdataOrText(inner).trim();
+  return decodeBasicEntities(text);
+}
+
+function getAllTagText(xml, tagName) {
+  const re = new RegExp(
+    `<${tagName}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tagName}>`,
+    "gi"
+  );
+  const out = [];
+  for (const m of xml.matchAll(re)) {
+    const inner = m[1] ?? "";
+    const text = decodeBasicEntities(pickCdataOrText(inner).trim());
+    if (text) out.push(text);
+  }
+  return out;
+}
+
+function getAllSelfClosingTagAttrs(xml, tagName) {
+  // <tag ... /> or <tag ...> の attrs を拾う（media:thumbnail, enclosure など）
+  const re = new RegExp(`<${tagName}\\s+([^>]*?)(?:\\/?>)`, "gi");
+  const items = [];
+
+  for (const m of xml.matchAll(re)) {
+    const attrStr = (m[1] ?? "").trim();
+    if (!attrStr) continue;
+
+    const attrs = {};
+
+    // "..."
+    for (const a of attrStr.matchAll(/([:\w-]+)\s*=\s*"([^"]*)"/g)) {
+      attrs[a[1]] = decodeBasicEntities(a[2]);
+    }
+    // '...'
+    for (const a of attrStr.matchAll(/([:\w-]+)\s*=\s*'([^']*)'/g)) {
+      if (!(a[1] in attrs)) attrs[a[1]] = decodeBasicEntities(a[2]);
+    }
+
+    items.push(attrs);
+  }
+
+  return items;
+}
+
+function stripTags(html) {
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+// note RSS: <item> から “取れる情報は全部” 拾う
 function pickItemsFromRss(xml, limit = 10) {
   const items = [];
   const blocks = xml.split("<item>").slice(1);
-  for (const b of blocks) {
+
+  for (const b0 of blocks) {
     if (items.length >= limit) break;
 
-    const title = (
-      b.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1] ??
-      b.match(/<title>(.*?)<\/title>/)?.[1] ??
-      ""
-    ).trim();
+    // </item> までを対象にする（後続の <item> 混入防止）
+    const b = b0.split("</item>")[0] ?? b0;
 
-    const link = (b.match(/<link>(.*?)<\/link>/)?.[1] ?? "").trim();
-    const pubDate = (b.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] ?? "").trim();
+    // 基本
+    const title = getFirstTagText(b, "title");
+    const link = getFirstTagText(b, "link");
+    const pubDate = getFirstTagText(b, "pubDate");
+    const guid = getFirstTagText(b, "guid");
 
-    // noteのサムネ: media:thumbnail url="..." があれば拾う（無ければ空）
-    const thumb = (
-      b.match(/<media:thumbnail[^>]*url="(.*?)"/)?.[1] ??
-      ""
-    ).trim();
+    // 作者（揺れ対策）
+    const author = getFirstTagText(b, "author");
+    const dcCreator = getFirstTagText(b, "dc:creator");
 
-    // description からテキストを抜きたい場合はここで抜けるが、
-    // 今は app.js が title だけでもOKなので最小構成にしている
-    if (link) items.push({ title, link, date: pubDate, thumb });
+    // 本文/要約（HTMLのことが多い）
+    const descriptionHtml = getFirstTagText(b, "description");
+    const contentEncoded = getFirstTagText(b, "content:encoded");
+
+    // 複数あり得る
+    const categories = getAllTagText(b, "category");
+
+    // noteのサムネ（複数拾う）
+    const thumbs = getAllSelfClosingTagAttrs(b, "media:thumbnail");
+    const thumb = thumbs[0]?.url ?? "";
+
+    // enclosure（url/type/length 等）
+    const enclosures = getAllSelfClosingTagAttrs(b, "enclosure");
+
+    // 追加で出る可能性のあるもの（あれば）
+    const dcDate = getFirstTagText(b, "dc:date");
+    const mediaContent = getAllSelfClosingTagAttrs(b, "media:content");
+
+    if (!link) continue;
+
+    items.push({
+      title,
+      link,
+      date: pubDate || dcDate,
+      guid,
+      author: dcCreator || author,
+
+      categories,
+
+      description_html: descriptionHtml,
+      description_text: descriptionHtml ? stripTags(descriptionHtml) : "",
+      content_encoded: contentEncoded,
+
+      thumb,
+      thumbs,
+      enclosures,
+      media_content: mediaContent,
+
+      // 取りこぼし対策（必要なければ消してOK）
+      raw_item_xml: b,
+    });
   }
+
   return items;
 }
 
@@ -54,7 +167,7 @@ async function main() {
     fetchText(ytFeedUrl),
   ]);
 
-  // note
+  // note（できるだけ全部）
   const noteItems = pickItemsFromRss(noteXml, 10);
 
   // YouTube Atom: <entry> をざっくりパース
@@ -64,7 +177,9 @@ async function main() {
     if (yt.length >= 8) break;
 
     const title = (e.match(/<title>(.*?)<\/title>/)?.[1] ?? "").trim();
-    const link = (e.match(/<link[^>]*rel="alternate"[^>]*href="(.*?)"/)?.[1] ?? "").trim();
+    const link = (
+      e.match(/<link[^>]*rel="alternate"[^>]*href="(.*?)"/)?.[1] ?? ""
+    ).trim();
     const published = (e.match(/<published>(.*?)<\/published>/)?.[1] ?? "").trim();
     const thumb = (e.match(/<media:thumbnail[^>]*url="(.*?)"/)?.[1] ?? "").trim();
 
@@ -78,11 +193,7 @@ async function main() {
   };
 
   ensureDir(path.join(process.cwd(), "data"));
-  fs.writeFileSync(
-    path.join("data", "feed.json"),
-    JSON.stringify(out, null, 2),
-    "utf-8"
-  );
+  fs.writeFileSync(path.join("data", "feed.json"), JSON.stringify(out, null, 2), "utf-8");
 
   console.log("wrote data/feed.json");
   console.log(`note: ${noteItems.length}, youtube: ${yt.length}`);
