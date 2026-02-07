@@ -11,9 +11,7 @@
   --accent: #0b3a6f;     /* 見出し用 */
 }
 
-*{
-  box-sizing: border-box;
-}
+*{ box-sizing: border-box; }
 
 html, body{
   margin: 0;
@@ -29,21 +27,25 @@ html, body{
   line-height: 1.8;
 }
 
+/* 余計な箇条書き/余白を消す（標準表示に戻らないための保険） */
+ul{ list-style: none; padding: 0; margin: 0; }
+a{ color: inherit; }
+
 /* =========================
-   Layout
+   Layout (いまは .wrap を使用)
 ========================= */
 
-.container{
+.wrap{
   max-width: 760px;
   margin: 0 auto;
   padding: 48px 20px 64px;
 }
 
 /* =========================
-   Header
+   Header (いまは siteHeader/siteTitle/siteLead を使用)
 ========================= */
 
-.header{
+.siteHeader{
   margin-bottom: 40px;
 }
 
@@ -51,82 +53,67 @@ html, body{
   font-size: 28px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 }
 
-.siteDesc{
+.siteLead{
   font-size: 15px;
   color: var(--muted);
+  margin: 0;
 }
 
 /* =========================
-   Section
+   Note Articles (app.js のDOMに合わせる)
 ========================= */
 
-.section{
-  margin-top: 48px;
-}
-
-.sectionTitle{
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--ink);
-}
-
-/* =========================
-   Note Articles
-========================= */
-
-.noteItem{
+/* li.card.note が1記事 */
+.card.note{
   padding: 24px 0;
   border-bottom: 1px solid var(--line);
 }
 
-.noteItem:last-child{
+.card.note:last-child{
   border-bottom: none;
 }
 
-.noteTitle{
+/* タイトルリンク a.title */
+.card.note .title{
+  display: block;
   font-size: 19px;
   font-weight: 600;
   line-height: 1.6;
   margin-bottom: 6px;
-}
-
-.noteTitle a{
   color: var(--ink);
   text-decoration: none;
 }
 
-.noteTitle a:hover{
+.card.note .title:hover{
   text-decoration: underline;
 }
 
-.noteDate{
+/* 日付 .meta */
+.card.note .meta{
   font-size: 13px;
   color: var(--muted);
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 
-.noteDesc{
+/* 概要 p.desc */
+.card.note .desc{
   font-size: 15px;
   color: var(--ink);
+  margin: 0;
 }
 
-/* 続きを読むリンク */
-.noteMore{
-  margin-top: 6px;
-}
-
-.noteMore a{
+/* （続きはこちら） a.moreLink */
+.moreLink{
   font-size: 14px;
   color: var(--accent);
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.noteMore a:hover{
+.moreLink:hover{
   text-decoration: underline;
 }
 
@@ -164,7 +151,7 @@ html, body{
 ========================= */
 
 @media (max-width: 640px){
-  .container{
+  .wrap{
     padding: 32px 16px 48px;
   }
 
@@ -172,15 +159,11 @@ html, body{
     font-size: 24px;
   }
 
-  .sectionTitle{
-    font-size: 20px;
-  }
-
-  .noteTitle{
+  .card.note .title{
     font-size: 17px;
   }
 
-  .noteDesc{
+  .card.note .desc{
     font-size: 14px;
   }
 
