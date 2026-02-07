@@ -3,30 +3,27 @@
 ========================= */
 
 :root{
-  --bg: #ffffff;
-  --paper: #ffffff;
-  --ink: #0f172a;        /* 濃いネイビー */
-  --muted: #64748b;      /* 補助テキスト */
-  --line: #e5e7eb;       /* 罫線 */
-  --accent: #0b3a6f;     /* 見出し・リンク */
+  --bg:#ffffff;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --line:#e5e7eb;
+  --accent:#0b3a6f;
 }
 
-*{
-  box-sizing: border-box;
-}
+*{ box-sizing:border-box; }
 
-html, body{
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--ink);
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--ink);
   font-family:
     "Hiragino Mincho ProN",
     "Hiragino Mincho Pro",
     "Yu Mincho",
     "Noto Serif JP",
     serif;
-  line-height: 1.9;
+  line-height:1.9;
 }
 
 /* =========================
@@ -34,9 +31,9 @@ html, body{
 ========================= */
 
 .container{
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 56px 20px 72px;
+  max-width:760px;
+  margin:0 auto;
+  padding:56px 20px 72px;
 }
 
 /* =========================
@@ -44,92 +41,91 @@ html, body{
 ========================= */
 
 .siteHeader{
-  margin-bottom: 48px;
-  padding-bottom: 24px;
-  border-bottom: 4px solid var(--ink); /* ← 太線（重要） */
+  margin-bottom:40px;
+  padding-bottom:18px;
+  border-bottom:4px solid var(--ink); /* ← 太線 */
 }
 
 .siteTitle{
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  margin: 0 0 8px;
+  margin:0 0 8px;
+  font-size:30px;
+  font-weight:600;
+  letter-spacing:.03em;
 }
 
 .siteDesc{
-  font-size: 15px;
-  color: var(--muted);
+  margin:0;
+  font-size:15px;
+  color:var(--muted);
 }
 
 /* =========================
-   Section
+   Note List (クラスに依存しない)
 ========================= */
 
-.section{
-  margin-top: 56px;
+/* ul の黒丸・余白を確実に消す */
+#noteList{
+  list-style:none;
+  padding:0;
+  margin:0;
 }
 
-.sectionTitle{
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 28px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
+/* 1記事（li） */
+#noteList > li{
+  padding:32px 0;
+  border-bottom:1px solid var(--line);
 }
 
-/* =========================
-   Note Articles
-========================= */
-
-.noteItem{
-  padding: 32px 0;
-  border-bottom: 1px solid var(--line);
+#noteList > li:last-child{
+  border-bottom:none;
 }
 
-.noteItem:last-child{
-  border-bottom: none;
+/* タイトルリンク：li直下の最初の a をタイトル扱い */
+#noteList > li > a{
+  display:block;
+  font-size:20px;
+  font-weight:600;
+  line-height:1.65;
+  color:var(--ink);
+  text-decoration:none;
+  margin-bottom:8px;
 }
 
-.noteTitle{
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.65;
-  margin: 0 0 6px;
+#noteList > li > a:hover{
+  text-decoration:underline;
 }
 
-.noteTitle a{
-  color: var(--ink);
-  text-decoration: none;
+/* 日付っぽい行（小さめのテキストが来る想定） */
+#noteList > li .meta,
+#noteList > li .noteDate,
+#noteList > li time{
+  display:block;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:12px;
 }
 
-.noteTitle a:hover{
-  text-decoration: underline;
+/* 本文の冒頭（p/div/span のどれでもそれっぽく） */
+#noteList > li p,
+#noteList > li .desc,
+#noteList > li .noteDesc{
+  margin:0;
+  font-size:15.5px;
+  color:var(--ink);
 }
 
-.noteDate{
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 12px;
+/* （続きはこちら）リンク（moreLink / noteMore どっちでも） */
+#noteList a.moreLink,
+#noteList .noteMore a{
+  font-size:14px;
+  color:var(--accent);
+  text-decoration:none;
+  white-space:nowrap;
 }
 
-.noteDesc{
-  font-size: 15.5px;
-  color: var(--ink);
-}
-
-/* 続きを読む */
-.noteMore{
-  margin-top: 8px;
-}
-
-.noteMore a{
-  font-size: 14px;
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.noteMore a:hover{
-  text-decoration: underline;
+#noteList a.moreLink:hover,
+#noteList .noteMore a:hover{
+  text-decoration:underline;
 }
 
 /* =========================
@@ -137,57 +133,45 @@ html, body{
 ========================= */
 
 .footer{
-  margin-top: 72px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  font-size: 13px;
-  color: var(--muted);
+  margin-top:72px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-size:13px;
+  color:var(--muted);
 }
 
 .footerInner{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
 
 .contactLink{
-  font-size: 14px;
-  color: var(--ink);
-  text-decoration: none;
+  font-size:14px;
+  color:var(--ink);
+  text-decoration:none;
 }
 
 .contactLink:hover{
-  text-decoration: underline;
+  text-decoration:underline;
 }
 
 /* =========================
    Responsive
 ========================= */
 
-@media (max-width: 640px){
-  .container{
-    padding: 40px 16px 56px;
-  }
+@media (max-width:640px){
+  .container{ padding:40px 16px 56px; }
+  .siteTitle{ font-size:26px; }
 
-  .siteTitle{
-    font-size: 26px;
-  }
-
-  .sectionTitle{
-    font-size: 20px;
-  }
-
-  .noteTitle{
-    font-size: 18px;
-  }
-
-  .noteDesc{
-    font-size: 14.5px;
-  }
+  #noteList > li > a{ font-size:18px; }
+  #noteList > li p,
+  #noteList > li .desc,
+  #noteList > li .noteDesc{ font-size:14.5px; }
 
   .footerInner{
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction:column;
+    align-items:flex-start;
   }
 }
