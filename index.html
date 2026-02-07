@@ -3,17 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>マン・AI</title>
-  <meta name="description" content="思考・音楽・酒・モノづくりの現在地（自動更新）" />
+  <title>マン・AI｜Business Notes</title>
+  <meta name="description" content="ビジネス・経済を考えるnote記事一覧" />
 
-  <!-- CSS -->
   <link rel="stylesheet" href="./assets/style.css" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&display=swap"
     rel="stylesheet"
   >
 </head>
@@ -21,133 +19,25 @@
 <body>
   <main class="wrap">
 
-    <!-- ===== Top / Header ===== -->
-    <section class="paper" id="top">
-      <div class="paperHead">
-        <div class="brandRow">
-          <img src="./assets/icon-allman.png" class="icon" alt="MAN-AI icon" />
-          <div class="brandText">
-            <h1 class="brand">マン・AI</h1>
-            <p class="tagline">
-              ビジネスの記事を書きながら、音楽をYouTubeに投稿し、日本酒を飲みながら、アートグッズを作っています。<br>
-              お問い合わせは
-              <a href="https://forms.gle/b5BRFGZTRaWYtNgN9" target="_blank" rel="noopener">こちら</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Header -->
+    <header class="siteHeader">
+      <h1 class="siteTitle">マン・AI</h1>
+      <p class="siteLead">
+        ビジネス・経済・企業戦略についてのノート。
+      </p>
+    </header>
 
-    <!-- ===== Business / note ===== -->
-    <section id="thoughts" class="card">
-      <h2>ビジネス・マン（note）</h2>
-
-      <!-- ★ class="list" を付けない -->
+    <!-- note list -->
+    <section class="noteSection">
       <ul id="noteList"></ul>
-
-      <p class="meta">
-        <a href="https://note.com/biz_organized" target="_blank" rel="noopener">
-          noteを開く
-        </a>
-      </p>
     </section>
 
-    <!-- ===== Chill / YouTube ===== -->
-    <section id="sounds" class="card">
-      <h2>チル・ザ・マン（YouTube）</h2>
-
-      <!-- grid はCSSと一致 -->
-      <div id="ytList" class="grid"></div>
-
-      <p class="meta">
-        <a href="https://www.youtube.com/@jazz-manbo" target="_blank" rel="noopener">
-          チャンネルを見る
-        </a>
-      </p>
-    </section>
-
-    <!-- ===== Sakenomi / YouTube embeds ===== -->
-    <section id="sakenomi_youtube" class="card">
-      <h2>サケノミ・マン（YouTube）</h2>
-
-      <iframe
-        width="350"
-        height="200"
-        src="https://www.youtube.com/embed/IhId4BXvbYc"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-
-      <iframe
-        width="350"
-        height="200"
-        src="https://www.youtube.com/embed/w0AD7ZrH1nc"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-    </section>
-
-    <!-- ===== Sakenomi / X ===== -->
-    <section id="sakenomi_x" class="card">
-      <h2>サケノミ・マン（X）</h2>
-
-      <blockquote class="twitter-tweet">
-        <p lang="ja" dir="ltr">
-          飲み終わった→栄光富士新、栄光富士酒未来、吾有事純米吟醸、花邑山田錦<br>
-          飲んでいる→朝日鷹生酒、栄光富士Gravity、上喜元翁<br>
-          購入済み→スーパーくどき上手Jr雄町、花陽浴八反錦、栄光冨士GMF24、作槐山一滴水<br>
-          買いたい→栄光富士愛山、花邑愛山、十四代別撰諸白
-        </p>
-        &mdash; サケノミ・マン (@hirokkobokko)
-        <a href="https://twitter.com/hirokkobokko/status/2004141122986352901">
-          December 25, 2025
-        </a>
-      </blockquote>
-
-      <!-- ★ widgets.js は1回だけ -->
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </section>
-
-    <!-- ===== Art / SUZURI ===== -->
-    <section id="objects" class="card">
-      <h2>アート・マン（SUZURI）</h2>
-
-      <p>新作や全商品はこちら：</p>
-
-      <p>
-        <a class="btn" href="https://suzuri.jp/YugenKozo" target="_blank" rel="noopener">
-          SUZURIショップへ
-        </a>
-      </p>
-
-      <iframe
-        height="162"
-        width="375"
-        src="https://suzuri.jp/YugenKozo/19352257/acrylic-keychain/50x50mm/clear/embed">
-      </iframe>
-
-      <iframe
-        height="162"
-        width="375"
-        src="https://suzuri.jp/YugenKozo/18228639/acrylic-keychain/50x50mm/clear/embed">
-      </iframe>
-    </section>
-
-    <!-- ===== Footer ===== -->
     <footer class="footer">
-      <div class="footerRow">
-        <small id="genAt"></small>
-        <small class="footSig">MAN-AI / edited by Front Man</small>
-      </div>
+      <small id="genAt"></small>
     </footer>
 
   </main>
 
-  <!-- JS -->
   <script defer src="./assets/app.js"></script>
 </body>
 </html>
