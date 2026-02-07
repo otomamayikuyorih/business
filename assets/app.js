@@ -1,5 +1,8 @@
+// assets/app.js
+
 function toEpoch(s) {
   if (!s) return 0;
+  // note: pubDate (RFC822), YouTube: ISO
   const t = Date.parse(s);
   return isNaN(t) ? 0 : t;
 }
@@ -16,7 +19,7 @@ function stripTags(html) {
 
 function joinCategories(cats) {
   if (!Array.isArray(cats) || cats.length === 0) return "";
-  const uniq = [...new Set(cats.map(c => (c || "").trim()).filter(Boolean))];
+  const uniq = [...new Set(cats.map((c) => (c || "").trim()).filter(Boolean))];
   return uniq.join(" / ");
 }
 
@@ -24,11 +27,15 @@ function makeNoteItem(item) {
   const li = document.createElement("li");
   li.className = "card note";
 
-  if (item.thumb) {
+  // thumb がある時だけ 2カラムにしたいのでクラス付与
+  const thumbUrl = (item.thumb || "").trim();
+  if (thumbUrl) {
+    li.classList.add("hasThumb");
+
     const img = document.createElement("img");
     img.className = "thumb";
     img.loading = "lazy";
-    img.src = item.thumb;
+    img.src = thumbUrl;
     img.alt = item.title || "note";
     li.appendChild(img);
   }
@@ -44,28 +51,39 @@ function makeNoteItem(item) {
   a.textContent = item.title || item.link;
   body.appendChild(a);
 
-  const meta = [];
+  // meta: date / author / categories
+  const parts = [];
   const d = fmtDate(item.date);
-  if (d) meta.push(d);
-  if (item.author) meta.push(`by ${item.author}`);
+  if (d) parts.push(d);
+  if (item.author) parts.push(`by ${item.author}`);
   const cats = joinCategories(item.categories);
-  if (cats) meta.push(cats);
+  if (cats) parts.push(cats);
 
-  if (meta.length) {
-    const m = document.createElement("div");
-    m.className = "meta";
-    m.textContent = meta.join("  |  ");
-    body.appendChild(m);
+  if (parts.length) {
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = parts.join("  |  ");
+    body.appendChild(meta);
   }
 
+  // description (text)
   const desc =
     (item.description_text && item.description_text.trim()) ||
     stripTags(item.description_html || "");
+
   if (desc) {
     const p = document.createElement("p");
     p.className = "desc";
     p.textContent = desc.length > 160 ? desc.slice(0, 160) + "…" : desc;
     body.appendChild(p);
+  }
+
+  // optional extra indicator
+  if (item.enclosures && item.enclosures.length) {
+    const ex = document.createElement("div");
+    ex.className = "extra";
+    ex.textContent = `enclosure: ${item.enclosures.length}`;
+    body.appendChild(ex);
   }
 
   li.appendChild(body);
@@ -79,11 +97,12 @@ function makeYtItem(v) {
   a.target = "_blank";
   a.rel = "noopener";
 
-  if (v.thumb) {
+  const thumbUrl = (v.thumb || "").trim();
+  if (thumbUrl) {
     const img = document.createElement("img");
     img.className = "thumb";
     img.loading = "lazy";
-    img.src = v.thumb;
+    img.src = thumbUrl;
     img.alt = v.title || "YouTube";
     a.appendChild(img);
   }
@@ -98,10 +117,10 @@ function makeYtItem(v) {
 
   const d = fmtDate(v.date);
   if (d) {
-    const m = document.createElement("div");
-    m.className = "meta";
-    m.textContent = d;
-    body.appendChild(m);
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = d;
+    body.appendChild(meta);
   }
 
   a.appendChild(body);
@@ -109,17 +128,10 @@ function makeYtItem(v) {
 }
 
 async function loadFeeds() {
-  console.log("[app] loadFeeds start");
-
-  const url = `./data/feed.json?v=${Date.now()}`;
-  const res = await fetch(url, { cache: "no-store" });
-  console.log("[app] fetch", url, "status:", res.status);
-
+  const res = await fetch(`./data/feed.json?v=${Date.now()}`, { cache: "no-store" });
   if (!res.ok) throw new Error(`feed.json fetch failed: ${res.status}`);
 
   const data = await res.json();
-  console.log("[app] parsed json keys:", Object.keys(data));
-  console.log("[app] note len:", data?.feeds?.note?.length, "yt len:", data?.feeds?.youtube?.length);
 
   // generated_at
   const genAt = new Date((data.generated_at || 0) * 1000);
@@ -131,34 +143,32 @@ async function loadFeeds() {
   // note
   const noteList = document.getElementById("noteList");
   if (!noteList) throw new Error("missing #noteList");
-
   noteList.innerHTML = "";
+
   const notes = (data.feeds?.note || [])
     .slice()
     .sort((a, b) => toEpoch(b.date) - toEpoch(a.date))
     .slice(0, 6);
 
-  notes.forEach(item => noteList.appendChild(makeNoteItem(item)));
+  notes.forEach((item) => noteList.appendChild(makeNoteItem(item)));
 
   // youtube
   const ytList = document.getElementById("ytList");
   if (!ytList) throw new Error("missing #ytList");
-
   ytList.innerHTML = "";
+
   const yts = (data.feeds?.youtube || [])
     .slice()
     .sort((a, b) => toEpoch(b.date) - toEpoch(a.date))
     .slice(0, 6);
 
-  yts.forEach(v => ytList.appendChild(makeYtItem(v)));
-
-  console.log("[app] render done");
+  yts.forEach((v) => ytList.appendChild(makeYtItem(v)));
 }
 
 loadFeeds().catch((e) => {
-  console.error("[app] ERROR:", e);
+  console.error(e);
 
-  // 画面にも出す（真っ白が一番つらいので）
+  // 画面にも出す（真っ白回避）
   const top = document.querySelector("#top .brandText");
   if (top) {
     const p = document.createElement("p");
