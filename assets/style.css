@@ -2,46 +2,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap');
 
 :root{
-  --bg:#f6f1e6;
+  --bg:#ffffff;
   --paper:#ffffff;
-  --ink:#161616;
-  --line:rgba(40,30,20,.12);
-  --muted:rgba(40,30,20,.58);
-  --accent:rgba(20,20,20,.82);
-
-  --tint: rgba(70,45,25,.10);
-  --tint2: rgba(70,45,25,.16);
-
-  font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --ink:#111827;                 /* ほぼ黒（ネイビー寄り） */
+  --line:rgba(15,23,42,.14);     /* 罫線 */
+  --muted:rgba(15,23,42,.55);    /* 補助 */
+  --accent:#0b3a6f;              /* リンク */
 }
 
-*{ box-sizing: border-box; }
+*{ box-sizing:border-box; }
 
-html, body{ height:100%; }
-
-body{
+html, body{
+  height:100%;
   margin:0;
-  background:
-    radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%),
-    radial-gradient(900px 500px at 100% 40%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
-    var(--bg);
+  padding:0;
+  background:var(--bg);
   color:var(--ink);
+  font-family:"Noto Serif JP","Hiragino Mincho ProN","Yu Mincho",serif;
+  line-height:1.9;
 }
 
+/* ===== Layout ===== */
 .wrap{
-  max-width:980px;
-  margin:0 auto;
-  padding:18px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px;
 }
 
-/* ===== business page container ===== */
+/* businessページの本文幅（読みやすさ重視） */
 .business{
   max-width: 820px;
   margin: 0 auto;
   padding: 28px 0 40px;
 }
 
-/* タイトル */
+/* ===== Header ===== */
 .business h1{
   margin: 0 0 10px;
   font-size: 30px;
@@ -50,7 +45,7 @@ body{
   font-family:"Libre Baskerville","Noto Serif JP",serif;
 }
 
-/* ★ HTML側に入れた<hr>の見た目だけ整える */
+/* ★ HTML側に入れた <hr class="rule"> の見た目 */
 .rule{
   border: 0;
   height: 4px;
@@ -59,35 +54,39 @@ body{
   opacity: .95;
 }
 
-/* ===== note list (app.jsのDOMに合わせる) ===== */
+/* ===== Note list ===== */
 #noteList{
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style:none;
+  padding:0;
+  margin:0;
 }
 
-/* 1記事 */
+/* 1記事＝段落（カード感を消す） */
 #noteList li.card.note{
-  background: var(--paper);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:18px 18px;
-  margin:16px 0;
-  box-shadow:0 14px 34px rgba(0,0,0,.05);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 28px 0;
+  margin: 0;
+  border-bottom: 1px solid var(--line);
 }
 
-/* タイトルリンク */
+#noteList li.card.note:last-child{
+  border-bottom: none;
+}
+
+/* タイトル */
 #noteList a.title{
   display:block;
   color:var(--ink);
   text-decoration:none;
   font-size: 20px;
   font-weight: 700;
-  line-height:1.55;
-  margin-bottom: 8px;
-  background:linear-gradient(transparent 68%,var(--tint) 0);
-  border-radius:6px;
-  padding:0 .08em;
+  line-height: 1.6;
+  margin: 0 0 8px;
+  padding: 0;
+  background: none; /* ← 帯を消す */
 }
 
 #noteList a.title:hover{
@@ -98,35 +97,53 @@ body{
 #noteList .meta{
   font-size: 13px;
   color: var(--muted);
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 }
 
-/* 概要 */
+/* 冒頭文 */
 #noteList .desc{
   margin: 0;
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--accent);
+  font-size: 15.5px;
+  color: var(--ink);
 }
 
-/* 続きはこちら */
+/* （続きはこちら） */
 #noteList a.moreLink{
   font-size: 14px;
-  color: var(--ink);
+  color: var(--accent);
   text-decoration: none;
-  margin-left: .25em;
+  margin-left: .35em;
   white-space: nowrap;
-  opacity: .9;
 }
 
 #noteList a.moreLink:hover{
   text-decoration: underline;
 }
 
-/* フッター（ある場合） */
+/* ===== Footer (任意) ===== */
 .footer{
-  margin:18px 0 40px;
-  color:var(--muted);
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footerInner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+.contactLink{
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contactLink:hover{
+  text-decoration: underline;
 }
 
 /* ===== Responsive ===== */
@@ -134,7 +151,21 @@ body{
   .business{
     padding: 18px 0 28px;
   }
+
   .business h1{
     font-size: 26px;
+  }
+
+  #noteList a.title{
+    font-size: 18px;
+  }
+
+  #noteList .desc{
+    font-size: 14.5px;
+  }
+
+  .footerInner{
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
