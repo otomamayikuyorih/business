@@ -1,177 +1,140 @@
-/* =========================
-   Base
-========================= */
+/* ===== Google Fonts ===== */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Serif+JP:wght@400;600;700&display=swap');
 
 :root{
-  --bg:#ffffff;
-  --ink:#0f172a;
-  --muted:#64748b;
-  --line:#e5e7eb;
-  --accent:#0b3a6f;
+  --bg:#f6f1e6;
+  --paper:#ffffff;
+  --ink:#161616;
+  --line:rgba(40,30,20,.12);
+  --muted:rgba(40,30,20,.58);
+  --accent:rgba(20,20,20,.82);
+
+  --tint: rgba(70,45,25,.10);
+  --tint2: rgba(70,45,25,.16);
+
+  font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
-*{ box-sizing:border-box; }
+*{ box-sizing: border-box; }
 
-html,body{
+html, body{ height:100%; }
+
+body{
   margin:0;
-  padding:0;
-  background:var(--bg);
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%),
+    radial-gradient(900px 500px at 100% 40%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
+    var(--bg);
   color:var(--ink);
-  font-family:
-    "Hiragino Mincho ProN",
-    "Hiragino Mincho Pro",
-    "Yu Mincho",
-    "Noto Serif JP",
-    serif;
-  line-height:1.9;
 }
 
-/* =========================
-   Layout
-========================= */
-
-.container{
-  max-width:760px;
+.wrap{
+  max-width:980px;
   margin:0 auto;
-  padding:56px 20px 72px;
+  padding:18px;
 }
 
-/* =========================
-   Header
-========================= */
-
-.siteHeader{
-  margin-bottom:40px;
-  padding-bottom:18px;
-  border-bottom:4px solid var(--ink); /* ← 太線 */
+/* ===== business page container ===== */
+.business{
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 28px 0 40px;
 }
 
-.siteTitle{
-  margin:0 0 8px;
-  font-size:30px;
-  font-weight:600;
-  letter-spacing:.03em;
+/* タイトル */
+.business h1{
+  margin: 0 0 10px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  font-family:"Libre Baskerville","Noto Serif JP",serif;
 }
 
-.siteDesc{
-  margin:0;
-  font-size:15px;
-  color:var(--muted);
+/* ★ HTML側に入れた<hr>の見た目だけ整える */
+.rule{
+  border: 0;
+  height: 4px;
+  background: var(--ink);
+  margin: 16px 0 26px;
+  opacity: .95;
 }
 
-/* =========================
-   Note List (クラスに依存しない)
-========================= */
-
-/* ul の黒丸・余白を確実に消す */
+/* ===== note list (app.jsのDOMに合わせる) ===== */
 #noteList{
-  list-style:none;
-  padding:0;
-  margin:0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* 1記事（li） */
-#noteList > li{
-  padding:32px 0;
-  border-bottom:1px solid var(--line);
+/* 1記事 */
+#noteList li.card.note{
+  background: var(--paper);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px 18px;
+  margin:16px 0;
+  box-shadow:0 14px 34px rgba(0,0,0,.05);
 }
 
-#noteList > li:last-child{
-  border-bottom:none;
-}
-
-/* タイトルリンク：li直下の最初の a をタイトル扱い */
-#noteList > li > a{
+/* タイトルリンク */
+#noteList a.title{
   display:block;
-  font-size:20px;
-  font-weight:600;
-  line-height:1.65;
   color:var(--ink);
   text-decoration:none;
-  margin-bottom:8px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height:1.55;
+  margin-bottom: 8px;
+  background:linear-gradient(transparent 68%,var(--tint) 0);
+  border-radius:6px;
+  padding:0 .08em;
 }
 
-#noteList > li > a:hover{
-  text-decoration:underline;
+#noteList a.title:hover{
+  text-decoration: underline;
 }
 
-/* 日付っぽい行（小さめのテキストが来る想定） */
-#noteList > li .meta,
-#noteList > li .noteDate,
-#noteList > li time{
-  display:block;
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:12px;
+/* 日付 */
+#noteList .meta{
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 10px;
 }
 
-/* 本文の冒頭（p/div/span のどれでもそれっぽく） */
-#noteList > li p,
-#noteList > li .desc,
-#noteList > li .noteDesc{
-  margin:0;
-  font-size:15.5px;
-  color:var(--ink);
+/* 概要 */
+#noteList .desc{
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--accent);
 }
 
-/* （続きはこちら）リンク（moreLink / noteMore どっちでも） */
-#noteList a.moreLink,
-#noteList .noteMore a{
-  font-size:14px;
-  color:var(--accent);
-  text-decoration:none;
-  white-space:nowrap;
+/* 続きはこちら */
+#noteList a.moreLink{
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+  margin-left: .25em;
+  white-space: nowrap;
+  opacity: .9;
 }
 
-#noteList a.moreLink:hover,
-#noteList .noteMore a:hover{
-  text-decoration:underline;
+#noteList a.moreLink:hover{
+  text-decoration: underline;
 }
 
-/* =========================
-   Footer
-========================= */
-
+/* フッター（ある場合） */
 .footer{
-  margin-top:72px;
-  padding-top:20px;
-  border-top:1px solid var(--line);
-  font-size:13px;
+  margin:18px 0 40px;
   color:var(--muted);
 }
 
-.footerInner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.contactLink{
-  font-size:14px;
-  color:var(--ink);
-  text-decoration:none;
-}
-
-.contactLink:hover{
-  text-decoration:underline;
-}
-
-/* =========================
-   Responsive
-========================= */
-
-@media (max-width:640px){
-  .container{ padding:40px 16px 56px; }
-  .siteTitle{ font-size:26px; }
-
-  #noteList > li > a{ font-size:18px; }
-  #noteList > li p,
-  #noteList > li .desc,
-  #noteList > li .noteDesc{ font-size:14.5px; }
-
-  .footerInner{
-    flex-direction:column;
-    align-items:flex-start;
+/* ===== Responsive ===== */
+@media (max-width:800px){
+  .business{
+    padding: 18px 0 28px;
+  }
+  .business h1{
+    font-size: 26px;
   }
 }
