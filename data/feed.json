@@ -1,7 +1,23 @@
 {
-  "generated_at": 1772334960,
+  "generated_at": 1772357863,
   "feeds": {
     "note": [
+      {
+        "title": "AIによるnote記事制作を2ヶ月運用して分かったこと｜このnoteを終える理由",
+        "link": "https://note.com/biz_organized/n/n2fa0dc46793a",
+        "date": "Sun, 01 Mar 2026 15:42:12 +0900",
+        "guid": "https://note.com/biz_organized/n/n2fa0dc46793a",
+        "author": "",
+        "categories": [],
+        "description_html": "<h2 name=\"475d7f42-5499-41ae-b829-10a4418c1b48\" id=\"475d7f42-5499-41ae-b829-10a4418c1b48\">はじめに</h2><p name=\"324e26e4-ec98-41aa-b0e9-55e579df7107\" id=\"324e26e4-ec98-41aa-b0e9-55e579df7107\">本記事では、AIによるnote記事制作が、実際の運用としてどこまで成立するのかを検証するために行ってきた取り組みをまとめました。<br><br>記事作成では、テーマ決定から情報収集、構成設計、本文生成までを自動化し、継続的に回る仕組みとして運用していました。技術的には半自動で回る体制を整えることができましたが、実際に2ヶ月運用してみると、仕組みとは別の課題も見えてきました。<br><br>記事の最後では、実際に運用して感じたこと、もっとこうしておけばよかった、という反省点もまとめました。AIを使ったコンテンツ制作に関心はあるものの、実運用のイメージが湧きにくい方に向けて、参考にして頂ければと思います。</p><br/><a href='https://note.com/biz_organized/n/n2fa0dc46793a'>続きをみる</a>",
+        "description_text": "はじめに 本記事では、AIによるnote記事制作が、実際の運用としてどこまで成立するのかを検証するために行ってきた取り組みをまとめました。 記事作成では、テーマ決定から情報収集、構成設計、本文生成までを自動化し、継続的に回る仕組みとして運用していました。技術的には半自動で回る体制を整えることができましたが、実際に2ヶ月運用してみると、仕組みとは別の課題も見えてきました。 記事の最後では、実際に運用して感じたこと、もっとこうしておけばよかった、という反省点もまとめました。AIを使ったコンテンツ制作に関心はあるものの、実運用のイメージが湧きにくい方に向けて、参考にして頂ければと思います。 続きをみる",
+        "content_encoded": "",
+        "thumb": "",
+        "thumbs": [],
+        "enclosures": [],
+        "media_content": [],
+        "raw_item_xml": "\n      <title>AIによるnote記事制作を2ヶ月運用して分かったこと｜このnoteを終える理由</title>\n      <media:thumbnail>https://assets.st-note.com/production/uploads/images/255547482/rectangle_large_type_2_18f1d3c42f68d59f4ebb48921a22e29d.png?width=800</media:thumbnail>\n      <description><![CDATA[<h2 name=\"475d7f42-5499-41ae-b829-10a4418c1b48\" id=\"475d7f42-5499-41ae-b829-10a4418c1b48\">はじめに</h2><p name=\"324e26e4-ec98-41aa-b0e9-55e579df7107\" id=\"324e26e4-ec98-41aa-b0e9-55e579df7107\">本記事では、AIによるnote記事制作が、実際の運用としてどこまで成立するのかを検証するために行ってきた取り組みをまとめました。<br><br>記事作成では、テーマ決定から情報収集、構成設計、本文生成までを自動化し、継続的に回る仕組みとして運用していました。技術的には半自動で回る体制を整えることができましたが、実際に2ヶ月運用してみると、仕組みとは別の課題も見えてきました。<br><br>記事の最後では、実際に運用して感じたこと、もっとこうしておけばよかった、という反省点もまとめました。AIを使ったコンテンツ制作に関心はあるものの、実運用のイメージが湧きにくい方に向けて、参考にして頂ければと思います。</p><br/><a href='https://note.com/biz_organized/n/n2fa0dc46793a'>続きをみる</a>]]></description>\n      <note:creatorImage>https://assets.st-note.com/production/uploads/images/242670966/profile_ba42db2bbb0eafe0292ece04365be562.png?fit=bounds&amp;format=jpeg&amp;quality=85&amp;width=330</note:creatorImage>\n      <note:creatorName>ビジネス・マン</note:creatorName>\n      <pubDate>Sun, 01 Mar 2026 15:42:12 +0900</pubDate>\n      <link>https://note.com/biz_organized/n/n2fa0dc46793a</link>\n      <guid>https://note.com/biz_organized/n/n2fa0dc46793a</guid>\n    "
+      },
       {
         "title": "買収の成否はデータが握る？M&Aを揺るがすプライバシー規制とガバナンスの真実",
         "link": "https://note.com/biz_organized/n/n6de7806e5562",
@@ -145,22 +161,6 @@
         "enclosures": [],
         "media_content": [],
         "raw_item_xml": "\n      <title>ディスプレイの壁を越えろ！XRと空間コンピューティングが解き放つ顧客体験とビジネスの未来図</title>\n      <media:thumbnail>https://assets.st-note.com/production/uploads/images/251444796/rectangle_large_type_2_7c4edd995235569a3c4f82ad7b877444.png?width=800</media:thumbnail>\n      <description><![CDATA[<h3 name=\"71571b44-bee7-4679-b7c1-74fb4cf1eae5\" id=\"71571b44-bee7-4679-b7c1-74fb4cf1eae5\">はじめに：なぜ今、XRと空間コンピューティングなのか？</h3><p name=\"6d6a09f5-31ba-4c1a-8947-2899070557f9\" id=\"6d6a09f5-31ba-4c1a-8947-2899070557f9\">現代のビジネスは、まさに激動の時代を迎えています。AIの急速な進化は私たちの想像をはるかに超え、デジタルトランスフォーメーション（DX）はもはや選択肢ではなく、企業の生命線となりつつあります。アクセンチュアの調査によれば、経営幹部の98%が「長期戦略においては、経済や政治、社会よりもテクノロジーの進歩を信頼する」と回答しており、テクノロジーがビジネスの核心にあることを明確に示しています。</p><br/><a href='https://note.com/biz_organized/n/n8f0f0cc7adc9'>続きをみる</a>]]></description>\n      <note:creatorImage>https://assets.st-note.com/production/uploads/images/242670966/profile_ba42db2bbb0eafe0292ece04365be562.png?fit=bounds&amp;format=jpeg&amp;quality=85&amp;width=330</note:creatorImage>\n      <note:creatorName>ビジネス・マン</note:creatorName>\n      <pubDate>Fri, 13 Feb 2026 19:00:34 +0900</pubDate>\n      <link>https://note.com/biz_organized/n/n8f0f0cc7adc9</link>\n      <guid>https://note.com/biz_organized/n/n8f0f0cc7adc9</guid>\n    "
-      },
-      {
-        "title": "noteを30日間やってみて、毎日更新をやめることにしました（2026年2月上旬）",
-        "link": "https://note.com/biz_organized/n/n70a3a635eaa1",
-        "date": "Sun, 08 Feb 2026 08:41:22 +0900",
-        "guid": "https://note.com/biz_organized/n/n70a3a635eaa1",
-        "author": "",
-        "categories": [],
-        "description_html": "<p name=\"34c340ff-1edc-4711-ae8c-9d8d7a0c3ffe\" id=\"34c340ff-1edc-4711-ae8c-9d8d7a0c3ffe\">いつもビジネス・マンのnoteを読んでいただいてありがとうございます。<br>1/10にnoteを開設してから、約30日が経ちました。今回は、20日目から30日目までの10日間で考えたことや、今後の運用方針について書いていきたいと思います。</p><p name=\"2973c575-cda6-4662-afb3-338fc74adf26\" id=\"2973c575-cda6-4662-afb3-338fc74adf26\">前回は「noteを20日間やってみて（2026年1月）」として、立ち上げ初期の運用結果をまとめましたが、本記事では<strong>その続編として、30日間運用してみてどうだったのか</strong>を、引き続き運用ログとして記録しておきたいと思います。</p><br/><a href='https://note.com/biz_organized/n/n70a3a635eaa1'>続きをみる</a>",
-        "description_text": "いつもビジネス・マンのnoteを読んでいただいてありがとうございます。 1/10にnoteを開設してから、約30日が経ちました。今回は、20日目から30日目までの10日間で考えたことや、今後の運用方針について書いていきたいと思います。 前回は「noteを20日間やってみて（2026年1月）」として、立ち上げ初期の運用結果をまとめましたが、本記事では その続編として、30日間運用してみてどうだったのか を、引き続き運用ログとして記録しておきたいと思います。 続きをみる",
-        "content_encoded": "",
-        "thumb": "",
-        "thumbs": [],
-        "enclosures": [],
-        "media_content": [],
-        "raw_item_xml": "\n      <title>noteを30日間やってみて、毎日更新をやめることにしました（2026年2月上旬）</title>\n      <media:thumbnail>https://assets.st-note.com/production/uploads/images/250011079/rectangle_large_type_2_81f613db86be42b07f4ae7c8897713e8.png?width=800</media:thumbnail>\n      <description><![CDATA[<p name=\"34c340ff-1edc-4711-ae8c-9d8d7a0c3ffe\" id=\"34c340ff-1edc-4711-ae8c-9d8d7a0c3ffe\">いつもビジネス・マンのnoteを読んでいただいてありがとうございます。<br>1/10にnoteを開設してから、約30日が経ちました。今回は、20日目から30日目までの10日間で考えたことや、今後の運用方針について書いていきたいと思います。</p><p name=\"2973c575-cda6-4662-afb3-338fc74adf26\" id=\"2973c575-cda6-4662-afb3-338fc74adf26\">前回は「noteを20日間やってみて（2026年1月）」として、立ち上げ初期の運用結果をまとめましたが、本記事では<strong>その続編として、30日間運用してみてどうだったのか</strong>を、引き続き運用ログとして記録しておきたいと思います。</p><br/><a href='https://note.com/biz_organized/n/n70a3a635eaa1'>続きをみる</a>]]></description>\n      <note:creatorImage>https://assets.st-note.com/production/uploads/images/242670966/profile_ba42db2bbb0eafe0292ece04365be562.png?fit=bounds&amp;format=jpeg&amp;quality=85&amp;width=330</note:creatorImage>\n      <note:creatorName>ビジネス・マン</note:creatorName>\n      <pubDate>Sun, 08 Feb 2026 08:41:22 +0900</pubDate>\n      <link>https://note.com/biz_organized/n/n70a3a635eaa1</link>\n      <guid>https://note.com/biz_organized/n/n70a3a635eaa1</guid>\n    "
       }
     ],
     "youtube": [
